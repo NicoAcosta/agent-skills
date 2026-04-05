@@ -1,0 +1,17 @@
+{
+  "name": "agent-skills",
+  "description": "Agent skills by Nico Acosta: LLM SEO, CLAUDE.md optimization, and more",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nico Acosta"
+  },
+  "homepage": "https://github.com/NicoAcosta/agent-skills",
+  "repository": "https://github.com/NicoAcosta/agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "llm-seo",
+    "claude-md-optimizer",
+    "marketplace"
+  ]
+}

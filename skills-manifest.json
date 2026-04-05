@@ -1,0 +1,16 @@
+{
+  "skills": [
+    {
+      "name": "llm-seo",
+      "repo": "NicoAcosta/llm-seo",
+      "path": "skills/llm-seo",
+      "version": "1.0.0"
+    },
+    {
+      "name": "claude-md-optimizer",
+      "repo": "NicoAcosta/claude-md-optimizer",
+      "path": "skills/claude-md-optimizer",
+      "version": "1.0.0"
+    }
+  ]
+}

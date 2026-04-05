@@ -1,0 +1,91 @@
+name: Sync Skills from Source Repos
+
+on:
+  repository_dispatch:
+    types: [skill-updated]
+  workflow_dispatch:
+    inputs:
+      skill:
+        description: 'Skill name to sync (or "all")'
+        required: false
+        default: 'all'
+  schedule:
+    - cron: '0 0 * * 0' # Weekly safety net
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout marketplace
+        uses: actions/checkout@v4
+
+      - name: Read manifest
+        id: manifest
+        run: |
+          echo "skills=$(cat skills-manifest.json | jq -c '.skills')" >> $GITHUB_OUTPUT
+
+      - name: Sync skills
+        run: |
+          SKILLS='${{ steps.manifest.outputs.skills }}'
+          FILTER="${{ github.event.inputs.skill || github.event.client_payload.skill || 'all' }}"
+
+          echo "$SKILLS" | jq -c '.[]' | while read -r skill; do
+            NAME=$(echo "$skill" | jq -r '.name')
+            REPO=$(echo "$skill" | jq -r '.repo')
+            PATH_PREFIX=$(echo "$skill" | jq -r '.path')
+
+            if [ "$FILTER" != "all" ] && [ "$FILTER" != "$NAME" ]; then
+              echo "Skipping $NAME (filter: $FILTER)"
+              continue
+            fi
+
+            echo "Syncing $NAME from $REPO..."
+
+            # Get latest release tag
+            LATEST_TAG=$(gh api "repos/$REPO/releases/latest" --jq '.tag_name' 2>/dev/null || echo "")
+            if [ -z "$LATEST_TAG" ]; then
+              LATEST_TAG=$(gh api "repos/$REPO/tags" --jq '.[0].name' 2>/dev/null || echo "main")
+            fi
+            echo "  Using tag: $LATEST_TAG"
+
+            # Clone source repo at tag
+            TMPDIR=$(mktemp -d)
+            git clone --depth 1 --branch "$LATEST_TAG" "https://github.com/$REPO.git" "$TMPDIR" 2>/dev/null || \
+              git clone --depth 1 "https://github.com/$REPO.git" "$TMPDIR"
+
+            # Sync skill files
+            rm -rf "skills/$NAME"
+            if [ -d "$TMPDIR/$PATH_PREFIX" ]; then
+              cp -r "$TMPDIR/$PATH_PREFIX" "skills/$NAME"
+            else
+              echo "  WARNING: $PATH_PREFIX not found in $REPO"
+            fi
+
+            # Update version in manifest
+            VERSION=$(echo "$LATEST_TAG" | sed 's/^v//')
+            if [ -n "$VERSION" ] && [ "$VERSION" != "main" ]; then
+              jq --arg name "$NAME" --arg version "$VERSION" \
+                '(.skills[] | select(.name == $name)).version = $version' \
+                skills-manifest.json > skills-manifest.tmp && mv skills-manifest.tmp skills-manifest.json
+            fi
+
+            rm -rf "$TMPDIR"
+            echo "  Done."
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "sync: update skills from source repos"
+            git push
+          fi

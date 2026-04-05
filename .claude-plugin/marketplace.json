@@ -1,0 +1,18 @@
+{
+  "name": "nicoacosta-skills",
+  "description": "Agent skills by Nico Acosta: LLM SEO, CLAUDE.md optimization, and more",
+  "owner": {
+    "name": "Nico Acosta"
+  },
+  "plugins": [
+    {
+      "name": "agent-skills",
+      "description": "Collection of agent skills for AI search optimization and developer tooling",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "Nico Acosta"
+      }
+    }
+  ]
+}
