@@ -9,6 +9,8 @@ description: >
 
 # CLAUDE.md Optimizer
 
+## Overview
+
 Analyze CLAUDE.md/AGENTS.md files and restructure them: keep only critical content inline, extract valuable detail to `docs/`, delete filler.
 
 **Goal**: CLAUDE.md under 50 lines (hard max: 100). Every line must earn its token cost.

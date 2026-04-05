@@ -9,38 +9,9 @@ description: >
 
 # Skill Publisher
 
+## Overview
+
 Automate the full lifecycle of creating, organizing, publishing, and distributing agent skills across all major AI coding environments.
-
-## When to Use
-
-- Creating a new skill repo from scratch
-- Publishing an existing local skill to GitHub / Skills.sh
-- Adding cross-platform configs to an existing skill
-- Registering a skill in a marketplace
-- Setting up local symlinks for development
-- Validating a SKILL.md against the agentskills.io spec
-
-## Workflow
-
-```dot
-digraph skill_publisher {
-    "What do you need?" [shape=diamond];
-    "Scaffold new repo" [shape=box];
-    "Organize existing skill" [shape=box];
-    "Link locally" [shape=box];
-    "Register in marketplace" [shape=box];
-    "Publish to Skills.sh" [shape=box];
-    "Verify" [shape=doublecircle];
-
-    "What do you need?" -> "Scaffold new repo" [label="new skill"];
-    "What do you need?" -> "Organize existing skill" [label="existing skill"];
-    "Scaffold new repo" -> "Link locally";
-    "Organize existing skill" -> "Link locally";
-    "Link locally" -> "Register in marketplace";
-    "Register in marketplace" -> "Publish to Skills.sh";
-    "Publish to Skills.sh" -> "Verify";
-}
-```
 
 ## 1. Scaffold a New Skill Repo
 
@@ -69,42 +40,7 @@ Create repo at `~/dev/skills/<skill-name>/` with this structure:
 
 **Why `skills/<name>/SKILL.md` not root:** Claude Code plugin system expects skills inside a `skills/` directory. This path satisfies both Skills.sh and plugin discovery.
 
-### plugin.json template
-
-```json
-{
-  "name": "<skill-name>",
-  "description": "<one-line description>",
-  "version": "1.0.0",
-  "author": { "name": "Nico Acosta" },
-  "homepage": "https://github.com/NicoAcosta/<skill-name>",
-  "repository": "https://github.com/NicoAcosta/<skill-name>",
-  "license": "MIT",
-  "keywords": ["<relevant>", "<keywords>"]
-}
-```
-
-Use same JSON for both `.claude-plugin/` and `.cursor-plugin/`.
-
-### GEMINI.md template
-
-```markdown
-This repo contains the **<skill-name>** skill for <brief purpose>.
-
-@./skills/<skill-name>/SKILL.md
-```
-
-### AGENTS.md template
-
-```markdown
-# <Skill Name>
-
-<What it does in 2-3 sentences.>
-
-## Usage
-
-Read the full skill at `skills/<skill-name>/SKILL.md`.
-```
+See [templates.md](references/templates.md) for plugin.json, GEMINI.md, and AGENTS.md templates.
 
 ## 2. Organize Existing Skill
 
