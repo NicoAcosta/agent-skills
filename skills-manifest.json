@@ -17,6 +17,18 @@
       "repo": "NicoAcosta/skill-publisher",
       "path": "skills/skill-publisher",
       "version": "1.0.0"
+    },
+    {
+      "name": "notion-to-docs",
+      "repo": "NicoAcosta/notion-to-docs",
+      "path": "skills/notion-to-docs",
+      "version": "1.0.0"
+    },
+    {
+      "name": "tenderly-devtools",
+      "repo": "NicoAcosta/tenderly-devtools",
+      "path": "skills/tenderly-devtools",
+      "version": "1.0.0"
     }
   ]
 }
