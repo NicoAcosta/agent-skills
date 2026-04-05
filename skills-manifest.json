@@ -11,6 +11,12 @@
       "repo": "NicoAcosta/claude-md-optimizer",
       "path": "skills/claude-md-optimizer",
       "version": "1.0.0"
+    },
+    {
+      "name": "skill-publisher",
+      "repo": "NicoAcosta/skill-publisher",
+      "path": "skills/skill-publisher",
+      "version": "1.0.0"
     }
   ]
 }
