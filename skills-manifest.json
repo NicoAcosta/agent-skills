@@ -4,31 +4,31 @@
       "name": "llm-seo",
       "repo": "NicoAcosta/llm-seo",
       "path": "skills/llm-seo",
-      "version": "1.0.0"
+      "version": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}"
     },
     {
       "name": "claude-md-optimizer",
       "repo": "NicoAcosta/claude-md-optimizer",
       "path": "skills/claude-md-optimizer",
-      "version": "1.0.0"
+      "version": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}"
     },
     {
       "name": "skill-publisher",
       "repo": "NicoAcosta/skill-publisher",
       "path": "skills/skill-publisher",
-      "version": "1.0.0"
+      "version": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}"
     },
     {
       "name": "notion-to-docs",
       "repo": "NicoAcosta/notion-to-docs",
       "path": "skills/notion-to-docs",
-      "version": "1.0.0"
+      "version": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}"
     },
     {
       "name": "tenderly-devtools",
       "repo": "NicoAcosta/tenderly-devtools",
       "path": "skills/tenderly-devtools",
-      "version": "1.0.0"
+      "version": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}"
     }
   ]
 }
